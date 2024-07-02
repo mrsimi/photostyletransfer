@@ -4,77 +4,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transfer Photo Settings</title>
+    <title>Transfer Photo Style</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        html,
+        button,
+        input{
+            font-family: "Work Sans", sans-serif;;
+            color: #050505;
+            background-color: #efefef;
+        }
+
+        body {
+            padding: 100px;
+        }
+
+        .header {
+            font-size: 2rem;
+        }
+
+        p,
+        i,
+        span {
+            text-align: center;
+        }
+
+        #firstpart {
+            width: 50%;
+            padding: 10px;
+        }
+
+        #secondpart {
+            width: 50%;
+            padding: 10px;
+        }
+
+        .form {
+            display: flex;
+            justify-content: flex-end;
+            height: 400px;
+        }
+        form{
+            margin: 0 auto;
+            width: 600px;
+        }
+        .img-view {
+            height: 300px;
+            display: none;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px 8px;
+            background-color: #050505;
+            color: #efefef;
+        }
+    </style>
 </head>
-<style>
-    body{
-        color: #F5F5F5;
-        text-transform: lowercase;
-        background-color: #222222;
-        display: flex;
-        justify-content: center;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif;
-    }
-
-    .section {
-        display: flex;
-        justify-content: center;
-    }
-
-    .parts {
-        margin: 10px;
-        padding: 10px;
-        width: 300px;
-        height: 400px;
-        display: flex;
-        flex-direction: column;
-    }
-    .img-view{
-        width: 300px;
-        height: 300px;
-        display: none;
-    }
-
-    button, .btn{
-        padding: 10px 5px;
-        margin-bottom: 10px;
-    }
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; 
-    }
-</style>
 
 <body>
-    <div>
-        <p style="text-align: center;">Transfer Photo Style</p>
-        <form id="uploadForm" action="/" method="post" enctype="multipart/form-data">
-            <div class="section">
-                <div class="parts">
-                    <p>take the style from this photo</p>
-                    <input type="file" id="originalImageInput" accept="image/*" class="btn" name=originalImageInput>
-                    <img id="imageOrigDisplay" src="" alt="original uploaded Image" class="img-view">
-                </div>
-                <div class="parts">
-                    <p>to this photo</p>
-                    <input type="file" id="targetImageInput" accept="image/*" class="btn" name=targetImageInput>
-                    <img id="targetOrigDisplay" src="" alt="target uploaded Image" class="img-view">
-                </div>
+    <p><span class="header">take how an image was edited to another image</span> <br>
+    <span>transfer photo style from one image to another</span></p> <br>
+    <p><i>(a lil backstory: i once saw an image and i like how it was edited, <br> but when i took mine it did not look
+            like the one i saw. so i thought what if i could transfer the style)</i></p>
+
+    <form id="uploadForm" action="/" method="post" enctype="multipart/form-data">
+        <div class="form">
+            <div id="firstpart">
+                <label>take the style from this photo</label>
+                <input type="file" id="originalImageInput" accept="image/*" class="btn" name=originalImageInput>
+                <img id="imageOrigDisplay" src="" alt="original uploaded Image" class="img-view">
             </div>
-            <button style="width: 600px; margin-left:40px" type="submit">
-                begin transfer
-            </button>
-        </form>
-    </div>
+            <div id="secondpart">
+                <label>to this photo</label>
+                <input type="file" id="targetImageInput" accept="image/*" class="btn" name=targetImageInput>
+                <img id="targetOrigDisplay" src="" alt="target uploaded Image" class="img-view">
+            </div>
+        </div>
+        <button>begin style transfer</button>
+    </form>
+
+
 </body>
 <script>
-    document.getElementById('originalImageInput').addEventListener('change', function(event) {
+    document.getElementById('originalImageInput').addEventListener('change', function (event) {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 const imageDisplay = document.getElementById('imageOrigDisplay');
                 imageDisplay.src = e.target.result;
                 imageDisplay.style.display = 'block';
@@ -83,11 +110,11 @@
         }
     });
 
-    document.getElementById('targetImageInput').addEventListener('change', function(event) {
+    document.getElementById('targetImageInput').addEventListener('change', function (event) {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 const imageDisplay = document.getElementById('targetOrigDisplay');
                 imageDisplay.src = e.target.result;
                 imageDisplay.style.display = 'block';
@@ -96,4 +123,5 @@
         }
     });
 </script>
+
 </html>
