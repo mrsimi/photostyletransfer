@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, send_file
 import tempfile
-from utils import transfer_style
+from utils import transferStyleInAToB
 from io import BytesIO
 import numpy as np
 
@@ -25,7 +25,7 @@ def uploadForm():
             to_file_stream.seek(0)
             to_file_bytes = np.asarray(bytearray(to_file_stream.read()), dtype=np.uint8)
 
-            file_path = transfer_style(from_file_bytes, to_file_bytes, temp_dir.name)
+            file_path = transferStyleInAToB(from_file_bytes, to_file_bytes, temp_dir.name)
             return send_file(file_path, as_attachment=True, mimetype='image/jpg', download_name=f"download.jpg");
 
     return render_template('index.html')

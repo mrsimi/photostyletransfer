@@ -1,19 +1,6 @@
 import cv2
 import numpy as np
 
-def match_means_and_stds(array1, array2):
-    mean1 = np.mean(array1)
-    mean2 = np.mean(array2)
-    
-    std1 = np.std(array1)
-    std2 = np.std(array2)
-    
-    standardized_array1 = (array1 - mean1) / std1
-    
-    matched_array1 = standardized_array1 * std2 + mean2
-    clipped_array1 = np.clip(matched_array1, 0, 255)
-    
-    return clipped_array1
 
 def combine_rgb(red, green, blue):
     assert red.shape == green.shape == blue.shape, "All input arrays must have the same shape"
@@ -23,24 +10,42 @@ def combine_rgb(red, green, blue):
     
     return image
 
-def transfer_style(from_image, to_image, output_dir):
-    # from_image = cv2.imread(from_image)
-    # to_image = cv2.imread(to_image)
+def take_image_split(image):
+    image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+    image_to_copy_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    return image_to_copy_rgb
 
-    from_image = cv2.imdecode(from_image, cv2.IMREAD_COLOR)
-    to_image = cv2.imdecode(to_image, cv2.IMREAD_COLOR)
+def transformAToB(A, B):
+     # Calculate means
+    mean1 = np.mean(A)
+    mean2 = np.mean(B)
+    
+    # Calculate standard deviations
+    std1 = np.std(A)
+    std2 = np.std(B)
+    
+    # Standardize array1
+    standardized_array1 = (A - mean1) / std1
+    
+    # Scale and shift to match mean and std of array2
+    matched_array1 = standardized_array1 * std2 + mean2
+    
+    # Clip the values to be within the range [0, 255]
+    clipped_array1 = np.clip(matched_array1, 0, 255)
+    return clipped_array1
 
-    from_image_rgb = cv2.cvtColor(from_image, cv2.COLOR_BGR2RGB)
-    to_image_rgb = cv2.cvtColor(to_image, cv2.COLOR_BGR2RGB)
+def transfromAToBImage(from_image, to_image):
+    nr = transformAToB(to_image[:,:,0], from_image[:,:,0])
+    ng = transformAToB(to_image[:,:,1], from_image[:,:,1])
+    nb = transformAToB(to_image[:,:,2], from_image[:,:,2])
+    return nr, ng, nb
 
-    r_fr, g_fr, b_fr = cv2.split(from_image_rgb)
-    r_to, g_to, b_to = cv2.split(to_image_rgb)
+def transferStyleInAToB(imageA, imageB, output_dir):
+    from_image = take_image_split(imageA)
+    to_image = take_image_split(imageB)
+    nr, ng, nb = transfromAToBImage(from_image, to_image)
 
-    adj_r = match_means_and_stds(r_fr, r_to)
-    adj_g = match_means_and_stds(g_fr, g_to)
-    adj_b = match_means_and_stds(b_fr, b_to)
-
-    rgb_image = combine_rgb(adj_b, adj_g, adj_r)
+    rgb_image = combine_rgb(nb, ng, nr)
 
     output_path = f'{output_dir}/image.jpg'
     cv2.imwrite(output_path, rgb_image)
