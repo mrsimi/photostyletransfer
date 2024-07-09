@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C10P3KXLME"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-C10P3KXLME');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transfer Photo Style</title>
@@ -13,8 +22,9 @@
     <style>
         html,
         button,
-        input{
-            font-family: "Work Sans", sans-serif;;
+        input {
+            font-family: "Work Sans", sans-serif;
+            ;
             color: #050505;
             background-color: #efefef;
             font-size: 12px;
@@ -49,10 +59,12 @@
             justify-content: flex-end;
             height: 400px;
         }
-        form{
+
+        form {
             margin: 0 auto;
             width: 600px;
         }
+
         .img-view {
             height: 300px;
             display: none;
@@ -75,27 +87,30 @@
             body {
                 padding: 100px 50px;
             }
-            form{
+
+            form {
                 margin: 0 auto;
                 width: 250px;
             }
-          }
+        }
 
-          @media screen and (max-width: 768px) {
+        @media screen and (max-width: 768px) {
             body {
                 padding: 100px 50px;
             }
-            form{
+
+            form {
                 margin: 0 auto;
                 width: 480px;
             }
-          }
+        }
     </style>
 </head>
 
 <body>
     <p><span class="header">take how an image was edited to another image</span> <br>
-    <span>transfer photo style from one image to another</span></p> <br>
+        <span>transfer photo style from one image to another</span>
+    </p> <br>
     <p><i>(i once saw an image and i like how it was edited, <br> but when i took mine it did not look
             like the one i saw. so i thought what if i could transfer the style)</i></p> <br> <br>
 
