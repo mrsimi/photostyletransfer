@@ -29,87 +29,65 @@
             background-color: #efefef;
             font-size: 12px;
         }
-
-        body {
-            padding: 100px;
+        body{
+            width: 500px;
+            margin: 100px auto;
         }
-
-        .header {
-            font-size: 2rem;
-        }
-
-        p,
-        i,
-        span {
+        p{
             text-align: center;
         }
-
-        #firstpart {
-            width: 50%;
-            padding: 10px;
-        }
-
-        #secondpart {
-            width: 50%;
-            padding: 10px;
-        }
-
-        .form {
+        .form{
             display: flex;
-            justify-content: flex-end;
-            height: 400px;
-        }
-
-        form {
-            margin: 0 auto;
-            width: 600px;
-        }
-
-        .img-view {
             height: 300px;
-            display: none;
         }
-
-        img {
+        .img-view{
+            width: 200px;
+            display: none;
+            height: 300px;
+        }
+        img{
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
-        button {
+        button{
+            padding: 8px 5px;
             width: 100%;
-            padding: 10px 8px;
             background-color: #050505;
             color: #efefef;
         }
+        .btn{
+            width: 250px;
+            margin: 0 auto;
+        }
+        .header{
+            font-size: 15px;
+        }
+        label{
+            font-size: 12.5px;
+        }
 
         @media screen and (max-width: 480px) {
-            body {
-                padding: 100px 50px;
+            body{
+                width: 300px;
+                margin: 100px auto;
             }
-
-            form {
-                margin: 0 auto;
-                width: 250px;
+            .form{
+                flex-direction: column;
+                height: 520px;
             }
-        }
-
-        @media screen and (max-width: 768px) {
-            body {
-                padding: 100px 50px;
-            }
-
-            form {
-                margin: 0 auto;
-                width: 480px;
+            .img-view{
+                height: 200px;
+                margin-bottom: 20px;
             }
         }
+
     </style>
 </head>
 
 <body>
-    <p><span class="header">take how an image was edited to another image</span> <br>
-        <span>transfer photo style from one image to another</span>
+    <p class="header">take how an image was edited to another image</p>
+        <p>transfer photo style from one image to another</p>
     </p> <br>
     <p><i>(i once saw an image and i like how it was edited, <br> but when i took mine it did not look
             like the one i saw. so i thought what if i could transfer the style)</i></p> <br> <br>
@@ -118,7 +96,7 @@
         <div class="form">
             <div id="firstpart">
                 <label>take the style from this photo</label>
-                <input type="file" id="originalImageInput" accept="image/*" class="btn" name=originalImageInput>
+                <input type="file" id="originalImageInput" accept="image/*" class="btn" name=originalImageInput> <br> <br>
                 <img id="imageOrigDisplay" src="" alt="original uploaded Image" class="img-view">
             </div>
             <div id="secondpart">
@@ -127,7 +105,9 @@
                 <img id="targetOrigDisplay" src="" alt="target uploaded Image" class="img-view">
             </div>
         </div>
-        <button>begin style transfer</button>
+        <div class="btn">
+            <button>begin style transfer</button>
+        </div>
     </form>
 
 
