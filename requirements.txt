@@ -8,3 +8,4 @@ numpy==2.0.0
 Werkzeug==3.0.3
 gunicorn
 pillow==10.3.0
+gevent==24.2.1
